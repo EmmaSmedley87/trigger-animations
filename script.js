@@ -36,4 +36,10 @@ class Explosion {
   }
 }
 
-//
+window.addEventListener("click", function (e) {
+  console.log(e);
+  ctx.fillStyle = "white";
+  ctx.fillRect(e.x, e.y, 50, 50);
+});
+
+//2.33.32
