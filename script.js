@@ -17,9 +17,13 @@ class Explosion {
     this.image = new Image();
     this.image.src = "images/boom.png";
     this.frame = 0;
+    this.timer = 0;
   }
   update() {
-    this.frame++;
+    this.timer++;
+    if (this.timer % 10 === 0) {
+      this.frame++;
+    }
   }
   draw() {
     // ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
