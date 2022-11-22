@@ -8,12 +8,12 @@ console.log(canvasPosition);
 
 class Explosion {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
     this.spriteWidth = 200;
     this.spriteHeight = 179;
-    this.width = this.spriteWidth / 2;
-    this.height = this.spriteHeight / 2;
+    this.width = this.spriteWidth / 0.7;
+    this.height = this.spriteHeight / 0.7;
+    this.x = x - this.spriteWidth / 2;
+    this.y = y - this.spriteHeight / 2;
     this.image = new Image();
     this.image.src = "images/boom.png";
     this.frame = 0;
@@ -45,6 +45,7 @@ window.addEventListener("click", function (e) {
   let positionX = e.x - canvasPosition.left;
   let positionY = e.y - canvasPosition.top;
   explosions.push(new Explosion(positionX, positionY));
+  console.log(explosions);
 });
 
 function animate() {
@@ -52,6 +53,11 @@ function animate() {
   for (let i = 0; i < explosions.length; i++) {
     explosions[i].update();
     explosions[i].draw();
+    // clear explosions each time
+    if (explosions[i].frame > 5) {
+      explosions.splice(i, 1);
+      i--;
+    }
   }
   requestAnimationFrame(animate);
 }
