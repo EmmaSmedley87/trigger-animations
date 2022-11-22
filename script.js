@@ -1,9 +1,10 @@
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
-
 canvas.width = 500;
 canvas.height = 700;
 const explosions = [];
+let canvasPosition = canvas.getBoundingClientRect();
+console.log(canvasPosition);
 
 class Explosion {
   constructor(x, y) {
@@ -31,15 +32,23 @@ class Explosion {
       this.x,
       this.y,
       this.width,
-      this.y
+      this.height
     );
   }
 }
 
 window.addEventListener("click", function (e) {
-  console.log(e);
-  ctx.fillStyle = "white";
-  ctx.fillRect(e.x, e.y, 50, 50);
+  let positionX = e.x - canvasPosition.left;
+  let positionY = e.y - canvasPosition.top;
+  explosions.push(new Explosion(positionX, positionY));
 });
 
-//2.33.32
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < explosions.length; i++) {
+    explosions[i].update();
+    explosions[i].draw();
+  }
+  requestAnimationFrame(animate);
+}
+animate();
