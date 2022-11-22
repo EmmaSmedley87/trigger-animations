@@ -42,11 +42,14 @@ class Explosion {
 }
 
 window.addEventListener("click", function (e) {
+  createAnimation(e);
+});
+
+function createAnimation(e) {
   let positionX = e.x - canvasPosition.left;
   let positionY = e.y - canvasPosition.top;
   explosions.push(new Explosion(positionX, positionY));
-  console.log(explosions);
-});
+}
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
